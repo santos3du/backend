@@ -55,4 +55,27 @@ public class ProductRepositoryTests {
 
     }
 
+    @Test
+    public void findByIdShouldReturnsIdWhenIdExists(){
+        Product p = new Product();
+        p.setId(22L);
+        Optional<Product> optional = productRepository.findById(p.getId());
+
+        Assertions.assertTrue(optional.isPresent());
+        Assertions.assertTrue(p.getId() == optional.get().getId());
+    }
+
+    @Test
+    public void findByIdShouldReturnsEmptyOptionalWhenIdNotExists() {
+        Product p = new Product();
+        p.setId(27L);
+        Optional<Product> optional = productRepository.findById(27L);
+        System.out.println("Valor do optional: " + optional);
+
+        Assertions.assertFalse(optional.isPresent());
+        Assertions.assertTrue(!optional.isPresent());
+    }
+
+
+
 }

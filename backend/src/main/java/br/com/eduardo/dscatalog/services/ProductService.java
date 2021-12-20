@@ -34,7 +34,7 @@ public class ProductService {
     }
 
     @Transactional(readOnly = true)
-    public ProductDTO findByid(Long id) {
+    public ProductDTO findById(Long id) {
         Optional<Product> obj = repo.findById(id);
         Product entity = obj.orElseThrow(() -> new ResourceNotFoundException("Id not found."));
         return new ProductDTO(entity, entity.getCategories());

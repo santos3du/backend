@@ -23,6 +23,10 @@ public class CategoryDTO implements Serializable {
         this.name = name;
     }
 
+    public CategoryDTO() {
+
+    }
+
     public String getName() {
         return name;
     }
