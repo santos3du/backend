@@ -49,8 +49,6 @@ public class ProductService {
 
     }
 
-
-
     @Transactional
     public ProductDTO update(Long id, ProductDTO dto) {
         try {
@@ -62,7 +60,6 @@ public class ProductService {
             throw new ResourceNotFoundException("Id not found " + id );
         }
     }
-
 
     public void delete(Long id) {
         try {
@@ -87,4 +84,5 @@ public class ProductService {
             entity.getCategories().add(category);
         }
     }
+
 }
