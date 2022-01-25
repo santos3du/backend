@@ -1,36 +1,36 @@
-package br.com.eduardo.dscatalog.entities;
+package br.com.eduardo.dscatalog.dto;
 
-import javax.persistence.*;
+import br.com.eduardo.dscatalog.entities.User;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-@Entity
-@Table(name = "tb_user")
-public class User implements Serializable {
-    public final static long serialVersionUID = 1L;
 
-    @Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class UserDTO implements Serializable {
+    public final static long serialVersionUID = 1L;
     private Long id;
     private String firstName;
     private String lastName;
     private String email;
-    private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "tb_user_role",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
+    Set<RoleDTO> roles = new HashSet<RoleDTO>();
 
-    public User() {}
+    public UserDTO() {}
 
-    public User(Long id, String firstName, String lastName, String email, String password) {
+    public UserDTO (Long id, String firstName, String lastName, String email) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.password = password;
+    }
+
+    public UserDTO(User entity) {
+        this.id = entity.getId();
+        this.firstName = entity.getFirstName();
+        this.lastName = entity.getLastName();
+        this.email = entity.getEmail();
+        entity.getRoles().forEach(role -> this.roles.add(new RoleDTO(role)));
+
     }
 
     public Long getId() {
@@ -65,11 +65,7 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Set<Role> getRoles() {
+    public Set<RoleDTO> getRoles() {
         return roles;
     }
 }
