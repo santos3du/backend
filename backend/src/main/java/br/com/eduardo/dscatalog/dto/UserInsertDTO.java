@@ -5,7 +5,9 @@ public class UserInsertDTO extends UserDTO{
 
     private String password;
 
-    UserInsertDTO() {}
+    UserInsertDTO() {
+        super();
+    }
 
     public String getPassword() {
         return password;

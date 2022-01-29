@@ -23,11 +23,11 @@ import java.util.Optional;
 
 @Service
 public class UserService {
-    private UserRepository repo;
+    private final UserRepository repo;
 
-    private RoleRepository roleRepository;
+    private final RoleRepository roleRepository;
 
-    private BCryptPasswordEncoder passwordEncoder;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
     public UserService(UserRepository repo, RoleRepository roleRepository, BCryptPasswordEncoder passwordEncoder){
@@ -39,7 +39,7 @@ public class UserService {
     @Transactional(readOnly = true)
     public Page<UserDTO> findAllPaged(Pageable pageable){
         Page<User> list = repo.findAll(pageable);
-        return list.map(x -> new UserDTO(x));
+        return list.map(UserDTO::new);
     }
 
     @Transactional(readOnly = true)
