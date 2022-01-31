@@ -5,6 +5,7 @@ import br.com.eduardo.dscatalog.entities.User;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,6 +14,7 @@ public class UserDTO implements Serializable {
     public final static long serialVersionUID = 1L;
     private Long id;
 
+    @Size(min = 3, max = 60, message = "O nome deve ter entre 3 a 60 caracteres.")
     @NotBlank(message = "Campo requerido")
     private String firstName;
 
