@@ -4,6 +4,10 @@ import br.com.eduardo.dscatalog.entities.Category;
 import br.com.eduardo.dscatalog.entities.Product;
 
 import javax.persistence.Column;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -13,10 +17,19 @@ import java.util.Set;
 public class ProductDTO implements Serializable {
     private static final long serialVersionUID = 1L;
     private Long id;
+
+    @Size(min = 5, max = 60, message = "Deve ter entre {min} e {max}")
+    @NotBlank(message = "Campo requerido")
     private String name;
+
+    @NotBlank(message = "Campo requerido")
     private String description;
+
+    @Positive(message = "Preço deve ser um valor positivo")
     private Double price;
     private String imgUrl;
+
+    @PastOrPresent(message = "A data do produto não pode ser futura.")
     private Instant date;
 
     private List<CategoryDTO> categories = new ArrayList<>();
