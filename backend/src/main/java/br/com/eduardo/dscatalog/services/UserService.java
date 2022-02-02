@@ -3,6 +3,7 @@ package br.com.eduardo.dscatalog.services;
 import br.com.eduardo.dscatalog.dto.RoleDTO;
 import br.com.eduardo.dscatalog.dto.UserDTO;
 import br.com.eduardo.dscatalog.dto.UserInsertDTO;
+import br.com.eduardo.dscatalog.dto.UserUpdateDTO;
 import br.com.eduardo.dscatalog.entities.Role;
 import br.com.eduardo.dscatalog.entities.User;
 import br.com.eduardo.dscatalog.repositories.RoleRepository;
@@ -60,7 +61,7 @@ public class UserService {
     }
 
     @Transactional
-    public UserDTO update(Long id, UserDTO dto) {
+    public UserDTO update(Long id, UserUpdateDTO dto) {
         try {
             User entity = repo.getOne(id);
             copyDtoToEntity(dto, entity);
